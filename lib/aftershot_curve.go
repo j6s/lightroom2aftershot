@@ -105,6 +105,8 @@ func (self *AfterShotToneCurveChannel) SerializePointsOut(maxNumberOfPoints int)
 	return self.serializePoints(points, maxNumberOfPoints)
 }
 
+// ---
+
 type AfterShotCombinedToneCurve struct {
 	Rgb   AfterShotToneCurveChannel
 	Red   AfterShotToneCurveChannel

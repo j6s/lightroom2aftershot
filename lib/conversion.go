@@ -112,14 +112,16 @@ func NewAftershotPresetFromLightroom(lightroom LightroomPreset) AfterShotPreset 
 		"Vibrance":    copyValueDirectly("bopt:vibe"),
 		"Saturation":  copyValueDirectly("bopt:sat"),
 
-		"HueAdjustmentRed":     copyValueDirectly("bopt:Equalizer_kb.kbs_redhue"),
-		"HueAdjustmentOrange":  copyValueDirectly("bopt:Equalizer_kb.kbs_orangehue"),
-		"HueAdjustmentYellow":  copyValueDirectly("bopt:Equalizer_kb.kbs_yellowhue"),
-		"HueAdjustmentGreen":   copyValueDirectly("bopt:Equalizer_kb.kbs_greenhue"),
-		"HueAdjustmentAqua":    copyValueDirectly("bopt:Equalizer_kb.kbs_cyanhue"),
-		"HueAdjustmentBlue":    copyValueDirectly("bopt:Equalizer_kb.kbs_bluehue"),
-		"HueAdjustmentMagenta": copyValueDirectly("bopt:Equalizer_kb.kbs_magentahue"),
+		// Through trial and errror I discovered that 100 in lightroom is roughly equal to 70 in aftershot
+		"HueAdjustmentRed":     applyMultiplier("bopt:Equalizer_kb.kbs_redhue", 0.7),
+		"HueAdjustmentOrange":  applyMultiplier("bopt:Equalizer_kb.kbs_orangehue", 0.7),
+		"HueAdjustmentYellow":  applyMultiplier("bopt:Equalizer_kb.kbs_yellowhue", 0.7),
+		"HueAdjustmentGreen":   applyMultiplier("bopt:Equalizer_kb.kbs_greenhue", 0.7),
+		"HueAdjustmentAqua":    applyMultiplier("bopt:Equalizer_kb.kbs_cyanhue", 0.7),
+		"HueAdjustmentBlue":    applyMultiplier("bopt:Equalizer_kb.kbs_bluehue", 0.7),
+		"HueAdjustmentMagenta": applyMultiplier("bopt:Equalizer_kb.kbs_magentahue", 0.7),
 
+		// Saturation values seem to be 1:1
 		"SaturationAdjustmentRed":     copyValueDirectly("bopt:Equalizer_kb.kbs_redsat"),
 		"SaturationAdjustmentOrange":  copyValueDirectly("bopt:Equalizer_kb.kbs_orangesat"),
 		"SaturationAdjustmentYellow":  copyValueDirectly("bopt:Equalizer_kb.kbs_yellowsat"),
@@ -128,6 +130,7 @@ func NewAftershotPresetFromLightroom(lightroom LightroomPreset) AfterShotPreset 
 		"SaturationAdjustmentBlue":    copyValueDirectly("bopt:Equalizer_kb.kbs_bluesat"),
 		"SaturationAdjustmentMagenta": copyValueDirectly("bopt:Equalizer_kb.kbs_magentasat"),
 
+		// Luminance seems to be 1:1
 		"LuminanceAdjustmentRed":     copyValueDirectly("bopt:Equalizer_kb.kbs_redlum"),
 		"LuminanceAdjustmentOrange":  copyValueDirectly("bopt:Equalizer_kb.kbs_orangelum"),
 		"LuminanceAdjustmentYellow":  copyValueDirectly("bopt:Equalizer_kb.kbs_yellowlum"),

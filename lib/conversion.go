@@ -3,6 +3,7 @@ package lib
 import (
 	"fmt"
 	"log"
+	"math"
 	"strconv"
 )
 
@@ -12,6 +13,19 @@ type AttributeMapper = func(preset AfterShotPreset, lightroomName string, value 
 func copyValueDirectly(destination string) AttributeMapper {
 	return func(preset AfterShotPreset, lightroomName string, value string) AfterShotPreset {
 		preset.Attributes[destination] = value
+		return preset
+	}
+}
+
+// Copies the absolute value
+func absInt(destination string) AttributeMapper {
+	return func(preset AfterShotPreset, lightroomName string, value string) AfterShotPreset {
+		valueFloat, err := strconv.ParseFloat(value, 64)
+		if err != nil {
+			log.Printf("[WARN] Could not convert %s to a float: %s", value, err)
+		}
+
+		preset.Attributes[destination] = fmt.Sprintf("%d", int(math.Abs(valueFloat)))
 		return preset
 	}
 }
@@ -59,13 +73,13 @@ func NewAftershotPresetFromLightroom(lightroom LightroomPreset) AfterShotPreset 
 	// attribute mapper functions (see above)
 	attributeMappers := map[string]AttributeMapper{
 		"Contrast2012":   copyValueDirectly("bopt:scont"),
-		"Highlights2012": copyValueDirectly("bopt:highlightrecval"),
+		"Highlights2012": absInt("bopt:highlightrecval"),
 
 		// Lightroom and Aftershot use a vastly differing scale.
 		"Shadows2012": applyMultiplier("bopt:fillamount", 0.01),
 
 		"Whites2012":  todo(),
-		"Blacks2012":  copyValueDirectly("bopt:blackPoint"),
+		"Blacks2012":  todo(),
 		"Clarity2021": todo(),
 		"Vibrance":    copyValueDirectly("bopt:vibe"),
 		"Saturation":  copyValueDirectly("bopt:sat"),

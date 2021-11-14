@@ -4,7 +4,7 @@ clean:
 	mkdir bin
 
 build: clean
-	go build -o bin/image-importer cmd/main.go
+	go build -o bin/lightroom2aftershot cmd/main.go
 
 build-all: clean
 	GOOS="linux"   GOARCH="amd64"       go build -o bin/lightroom2aftershot__linux-amd64 cmd/main.go

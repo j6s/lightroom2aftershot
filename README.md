@@ -18,6 +18,13 @@ $ lightroom2aftershot lightroom-preset.xml > aftershot-preset.xml
 
 Note: Currently, there are no graphical user interfaces available.
 
+## Required plugins
+
+The converter assumes that you have the following plugins installed:
+
+* [Wavelet Sharpen](https://www.aftershotpro.com/de/plugins/waveletsharpen3/)
+* Color Equalizer (Ships with AP3, so you should have it installed already)
+
 ## This is not perfect
 
 It is important to note, that the conversion being done here is not perfect. Aftershot interprets

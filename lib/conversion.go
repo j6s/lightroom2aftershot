@@ -68,6 +68,34 @@ func ignore() AttributeMapper {
 
 func NewAftershotPresetFromLightroom(lightroom LightroomPreset) AfterShotPreset {
 
+	emptyAttributeSet := map[string]string{
+		"bopt:scont":                       "0",
+		"bopt:highlightrecval":             "0",
+		"bopt:fillamount":                  "0",
+		"bopt:Equalizer_kb.kbs_redhue":     "0",
+		"bopt:Equalizer_kb.kbs_orangehue":  "0",
+		"bopt:Equalizer_kb.kbs_yellowhue":  "0",
+		"bopt:Equalizer_kb.kbs_greenhue":   "0",
+		"bopt:Equalizer_kb.kbs_cyanhue":    "0",
+		"bopt:Equalizer_kb.kbs_bluehue":    "0",
+		"bopt:Equalizer_kb.kbs_magentahue": "0",
+		"bopt:Equalizer_kb.kbs_redsat":     "0",
+		"bopt:Equalizer_kb.kbs_orangesat":  "0",
+		"bopt:Equalizer_kb.kbs_yellowsat":  "0",
+		"bopt:Equalizer_kb.kbs_greensat":   "0",
+		"bopt:Equalizer_kb.kbs_cyansat":    "0",
+		"bopt:Equalizer_kb.kbs_bluesat":    "0",
+		"bopt:Equalizer_kb.kbs_magentasat": "0",
+		"bopt:Equalizer_kb.kbs_redlum":     "0",
+		"bopt:Equalizer_kb.kbs_orangelum":  "0",
+		"bopt:Equalizer_kb.kbs_yellowlum":  "0",
+		"bopt:Equalizer_kb.kbs_greenlum":   "0",
+		"bopt:Equalizer_kb.kbs_cyanlum":    "0",
+		"bopt:Equalizer_kb.kbs_bluelum":    "0",
+		"bopt:Equalizer_kb.kbs_magentalum": "0",
+		"bopt:Equalizer_kb.kbs_enabled":    "true",
+	}
+
 	// Attribute mappers are used to map lightroom attributes to aftershot attributes.
 	// Keys correspond to attribute names in lightroom configuration, values correspond to
 	// attribute mapper functions (see above)
@@ -221,7 +249,8 @@ func NewAftershotPresetFromLightroom(lightroom LightroomPreset) AfterShotPreset 
 	}
 
 	preset := AfterShotPreset{
-		ToneCurve: newAfterShotCombinedToneCurveFromLightRoomToneCurve(lightroom.ToneCurve),
+		Attributes: emptyAttributeSet,
+		ToneCurve:  newAfterShotCombinedToneCurveFromLightRoomToneCurve(lightroom.ToneCurve),
 	}
 	preset.Attributes = map[string]string{
 		"bopt:Equalizer_kb.kbs_enabled": "true",

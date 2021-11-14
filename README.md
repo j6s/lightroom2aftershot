@@ -10,9 +10,13 @@ This application aims to convert lightroom presets to aftershot presets.
 
 ## Usage
 
+Download the latest binary from the [release page](https://github.com/j6s/lightroom2aftershot/releases).
+
 ```
 $ lightroom2aftershot lightroom-preset.xml > aftershot-preset.xml
 ```
+
+Note: Currently, there are no graphical user interfaces available.
 
 ## This is not perfect
 
